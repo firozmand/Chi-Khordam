@@ -54,18 +54,20 @@ export default function AddMealWizard() {
 
   const getQuickAdd = () => {
     if (!searchTerm) return null;
-    
+
     // Simple regex to find number and food name
     // Matches: "3 تخم مرغ", "۳ عدد موز", "یک کف دست نان"
-    const match = searchTerm.match(/^(\d+|یک|دو|سه|چهار|پنج)\s*(تا|عدد|کف دست|قاشق)?\s*(.*)$/);
+    const match = searchTerm.match(
+      /^(\d+|یک|دو|سه|چهار|پنج)\s*(تا|عدد|کف دست|قاشق)?\s*(.*)$/,
+    );
     if (!match) return null;
 
     const numStr = match[1];
     const foodName = match[3].trim();
-    
+
     if (foodName.length < 2) return null;
 
-    const food = FOOD_DATABASE.find(f => f.name.includes(foodName));
+    const food = FOOD_DATABASE.find((f) => f.name.includes(foodName));
     if (!food) return null;
 
     let qty = 1;
@@ -90,13 +92,17 @@ export default function AddMealWizard() {
     setSearchTerm("");
   };
 
-  const addIngredient = (food: Food, forcedQty?: number, forcedMode?: "grams" | "servings") => {
+  const addIngredient = (
+    food: Food,
+    forcedQty?: number,
+    forcedMode?: "grams" | "servings",
+  ) => {
     const mode = forcedMode || unitMode;
     const rawQty = forcedQty || Number(tempQuantity);
-    
+
     let calcQty = rawQty;
     let displayUnit = "گرم";
-    
+
     if (mode === "servings" && food.servingWeight) {
       calcQty = rawQty * food.servingWeight;
       displayUnit = food.servingUnit || "عدد";
@@ -275,9 +281,12 @@ export default function AddMealWizard() {
                   className="w-full flex justify-between items-center p-4 bg-primary/10 border border-primary/20 rounded-2xl animate-pulse group"
                 >
                   <div className="text-right">
-                    <div className="text-[10px] font-bold text-primary mb-1">افزودن سریع ⚡️</div>
+                    <div className="text-[10px] font-bold text-primary mb-1">
+                      افزودن سریع ⚡️
+                    </div>
                     <div className="font-bold text-sm">
-                      {quickAdd.qty} {quickAdd.food.servingUnit || "واحد"} {quickAdd.food.name}
+                      {quickAdd.qty} {quickAdd.food.servingUnit || "واحد"}{" "}
+                      {quickAdd.food.name}
                     </div>
                   </div>
                   <Check className="text-primary group-hover:scale-125 transition-transform" />
@@ -290,15 +299,25 @@ export default function AddMealWizard() {
                     مقدار مصرفی
                   </label>
                   <div className="flex bg-white rounded-lg p-0.5 shadow-inner">
-                    <button 
+                    <button
                       onClick={() => setUnitMode("grams")}
-                      className={cn("px-2 py-1 text-[10px] rounded-md transition-all", unitMode === "grams" ? "bg-primary text-white shadow-sm" : "text-slate-400")}
+                      className={cn(
+                        "px-2 py-1 text-[10px] rounded-md transition-all",
+                        unitMode === "grams"
+                          ? "bg-primary text-white shadow-sm"
+                          : "text-slate-400",
+                      )}
                     >
                       گرم
                     </button>
-                    <button 
+                    <button
                       onClick={() => setUnitMode("servings")}
-                      className={cn("px-2 py-1 text-[10px] rounded-md transition-all", unitMode === "servings" ? "bg-primary text-white shadow-sm" : "text-slate-400")}
+                      className={cn(
+                        "px-2 py-1 text-[10px] rounded-md transition-all",
+                        unitMode === "servings"
+                          ? "bg-primary text-white shadow-sm"
+                          : "text-slate-400",
+                      )}
                     >
                       واحد
                     </button>
