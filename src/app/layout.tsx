@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "چقدر خوردم !",
   description: "مدیریت هوشمند تغذیه و کالری",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
