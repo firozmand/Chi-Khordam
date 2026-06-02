@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-vazir: "Vazirmatn", sans-serif;
+
+  --color-primary: #8B5CF6;
+  --color-primary-light: #A78BFA;
+  --color-bg-light: #F3F4F6;
+  --color-surface: #FFFFFF;
+  --color-success: #10B981;
+}
+
+:root {
+  --bg-color: #f0f2f5;
+  --neu-shadow-dark: rgba(0, 0, 0, 0.1);
+  --neu-shadow-light: rgba(255, 255, 255, 0.8);
+}
+
+@layer base {
+  body {
+    @apply bg-bg-light text-slate-800 antialiased;
+    font-family: var(--font-vazir);
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .neu-card {
+    @apply bg-white rounded-[32px] p-6;
+    box-shadow: 10px 10px 20px var(--neu-shadow-dark),
+      -10px -10px 20px var(--neu-shadow-light);
+  }
+
+  .neu-inset {
+    @apply rounded-[20px] bg-bg-light;
+    box-shadow: inset 5px 5px 10px var(--neu-shadow-dark),
+      inset -5px -5px 10px var(--neu-shadow-light);
+  }
+
+  .neu-button {
+    @apply bg-primary text-white rounded-[24px] py-3 px-6 transition-all duration-300 active:scale-95;
+    box-shadow: 4px 4px 10px rgba(139, 92, 246, 0.3);
+  }
+
+  .neu-input {
+    @apply w-full bg-slate-50 border-none rounded-[20px] px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 transition-all;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20;
+  }
+
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 h-20 bg-white/80 backdrop-blur-lg flex justify-around items-center px-4 rounded-t-[32px] z-50;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Custom Scrollbar for mobile feel */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
